@@ -6,20 +6,18 @@ using namespace std;
 int main(void) {
 
 	int N; cin >> N;
-	int min_len = 100, max_len = 0;
+	int len;
 	bool flag = false;
 	string* str = new string[N];
 	vector<int> idxArr;
 
 	for (int i = 0; i < N; ++i) {
 		cin >> str[i];
-		if (str[i].size() < min_len)
-			min_len = str[i].size();
-		if (str[i].size() > max_len)
-			max_len = str[i].size();
 	}
 
-	for (int j = 0; j < min_len; ++j) {
+	len = str[0].size();
+
+	for (int j = 0; j < len; ++j) {
 		char tmp = str[0][j];
 		flag = true;
 		for (int i = 0; i < N; ++i) {
@@ -33,13 +31,19 @@ int main(void) {
 		}
 	}
 
-	for (int i = 0; i < max_len; ++i) {
+	for (int i = 0; i < len; ++i) {
 		if (idxArr.size() == 0)
 			cout << '?' ;
 		else {
-			if (i >= idxArr[0] && i <= idxArr.back())
-				cout << str[0][i];
-			else
+			flag = true;
+			for (int j = 0; j < idxArr.size(); ++j) {
+				if (idxArr[j] == i) {
+					flag = false;
+					cout << str[0][i];
+					break;
+				}
+			}
+			if(flag)
 				cout << '?';
 		}
 	}
