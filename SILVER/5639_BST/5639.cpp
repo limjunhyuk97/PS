@@ -5,7 +5,6 @@ using namespace std;
 struct node {
 	node* ln;
 	node* rn;
-	node* pn;
 	int data;
 };
 
@@ -13,42 +12,49 @@ node BSTRoot;
 node* pNode, * cNode;
 int n;
 
-void makeNode(node* n, int d, node* l, node* r, node *p) {
-	n = (node*)malloc(sizeof(node));
-	n->data = d;
-	n->ln = l;
-	n->rn = r;
-	n->pn = p;
+node makeNode(int d, node* l, node* r) {
+	node tmp = { l, r, d };
+	return tmp;
 }
 
-bool insertNode(node* p, node* c, int d) {
-
-	if (c == NULL) {
-		makeNode(c, d, NULL, NULL, p);
-		return true;
-	}
-
+bool insertNode(node* p, node* c, int d, bool direction) {
 
 	// 루트 노드에서 출발
 	if (p == c) {
-		if (c->data < d) {
-			c = p->ln;
-			insertNode(p, c, d);
+		if (p->data < d) {
+			c = p->rn;
+			if (insertNode(p, c, d, false))
+				return true;
 		}
 		else {
-			c = p->rn;
-			insertNode(p, c, d);
+			c = p->ln;
+			if (insertNode(p, c, d, true))
+				return true;
 		}
 	}
 
-	// 새로 들어온 값 크다
-	if (p->data < d) {
+	if (c == NULL) {
+		c = (node *)malloc(sizeof(node)); 
+		*c = makeNode(d, NULL, NULL);
+		if (direction) p->ln = c;
+		else p->rn = c;
+		return true;
+	}
 
+	// 새로 들어온 값 크다
+	if (c->data < d) {
+		p = c;
+		c = p->rn;
+		if(insertNode(p, c, d, false))
+			return true;
 	}
 
 	// 기존 값 크다.
 	else {
-
+		p = c;
+		c = p->ln;
+		if (insertNode(p, c, d, true))
+			return true;
 	}
 }
 
@@ -69,12 +75,11 @@ int main() {
 	cout.tie(NULL);
 
 	cin >> n;
-	BSTRoot.data = n; BSTRoot.ln = BSTRoot.pn = BSTRoot.rn = NULL;
-	pNode = cNode = &BSTRoot;
+	BSTRoot.data = n; BSTRoot.ln = BSTRoot.rn = NULL;
 	
 	while (!cin.eof()) {
 		cin >> n;
-		insertNode(pNode, cNode, n);
+		insertNode(&BSTRoot, &BSTRoot, n, true);
 	}
 
 	prostfixInorderTraverse(&BSTRoot);
