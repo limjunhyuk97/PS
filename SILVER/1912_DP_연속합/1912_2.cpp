@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int DP[10004][2];
+int DP[100004][2];
 int N, M = -1005;
 
 int main(void) {
@@ -12,7 +12,7 @@ int main(void) {
 		cin >> DP[i][0];
 
 	for (int i = 1; i <= N; ++i) {
-
+		
 		if (DP[i - 1][1] + DP[i][0] < DP[i][0])
 			DP[i][1] = DP[i][0];
 		else
