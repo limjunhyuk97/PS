@@ -85,6 +85,7 @@ int main(void) {
 	for (int i = 0; i < N; ++i) {
 		for (int j = 0; j < N; ++j) {
 			if (B == 1)
+				// 이 부분에서 1000으로 나눠주지 않아서 한참 고민 했다..
 				cout << M[i][j] % 1000 << " ";
 			else {
 				if (c % 2 == 0)
