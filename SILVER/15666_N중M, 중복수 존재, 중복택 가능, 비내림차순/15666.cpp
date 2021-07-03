@@ -5,7 +5,7 @@
 using namespace std;
 
 int N, M, tmp;
-// numberSet에 insert 되는 key 값이 연속되지 않으면, 떨어진 부분들에는 valuerk 0인 key들이 채워진다.
+// numberSet에 insert 되는 key 값이 연속되지 않으면, 사이 부분들에 value가 0인 key들이 채워진다.
 map<int, int> numberSet;
 vector<int> s;
 
