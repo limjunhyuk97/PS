@@ -43,6 +43,7 @@ int main(void){
                 if(i + k <= m){
                     int sum = 0;
                     for(int p=0; p<(int)(10/k); ++p){
+                        if(j + p >= n) break;
                         for(int l = 0; l < k ; ++l){
                             sum += grid[i + l][j + p];
                         }
