@@ -31,7 +31,7 @@ int numbers[1000];
 // promising constraint
 // 1. idx까지 가능한 sum 고려한 U + remaining T >= 목표치 W 이면 OK
 // 2. idx까지 가능한 sum 고려한 U == 목표치 W 이면 OK
-// 3. idx까지 가능한 sum 고려한 U + 다음거 더했을때 numbers[idx+1] >= 목표치 W 이어야 OK
+// 3. idx까지 가능한 sum 고려한 U + 다음거 더했을때 numbers[idx+1] <= 목표치 W 이어야 OK
 bool promising(int idx, int U, int T){
     return (numbers[idx] + T >= W) && ( (U == W) || (idx == N ? false : (U + numbers[idx+1] <= W)) );
 }
