@@ -64,6 +64,7 @@ int main(){
     int modulo, euler_phi_val;
     vector<a_order> a_order_pair;
     
+    cout << "modulo : ";
     cin >> modulo;
     
     for(int i=1; i<modulo; ++i){

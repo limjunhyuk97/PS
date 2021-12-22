@@ -33,7 +33,7 @@ int numbers[1000];
 // 2. idx까지 가능한 sum 고려한 U == 목표치 W 이면 OK
 // 3. idx까지 가능한 sum 고려한 U + 다음거 더했을때 numbers[idx+1] <= 목표치 W 이어야 OK
 bool promising(int idx, int U, int T){
-    return (numbers[idx] + T >= W) && ( (U == W) || (idx == N ? false : (U + numbers[idx+1] <= W)) );
+    return (U + T >= W) && ( (U == W) || U + numbers[idx+1] <= W );
 }
 
 void sum_of_subset(int idx, int U, int T){
@@ -73,7 +73,7 @@ int main(void){
     
     
     // 정렬이 되어있어야 함
-    sort(numbers, numbers+N);
+    sort(numbers, numbers+N+1);
     
     // Backtracking 시작
     sum_of_subset(0, 0, total_sum);
