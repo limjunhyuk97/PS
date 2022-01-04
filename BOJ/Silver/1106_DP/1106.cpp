@@ -23,7 +23,13 @@ typedef long long int ll;
 
 int C, N;
 vector<pair<int, int> > cost;
-int DP[1005];
+int DP[1500], min_val= INT_INF;
+
+// knapsack에 눌러담아주기 전에 무게가 무거운 순으로 정렬한다.
+// 여기서 무게는 사람의 수이다. (구할 목표가 비용이므로!)
+bool comp(pair<int, int> p1, pair<int, int> p2){
+    return p1.second > p2.second;
+}
 
 int main(void){
     
@@ -33,19 +39,20 @@ int main(void){
         cost.push_back({c, p});
     }
     
-    for(int i=0; i<cost.size(); ++i){
-        for(int j=cost[i].second; j<=C; j++){
-            if(DP[j] == 0){
-                if(j-cost[i].second != 0 && DP[j-cost[i].second] == 0) continue;
-                else DP[j] = DP[j-cost[i].second] + cost[i].first;
-            }
-            else{
-                DP[j] = min(DP[j], DP[j-cost[i].second] + cost[i].first);
-            }
+    for(int i=1; i<1500; ++i) DP[i] = INT_INF;
+    
+    sort(cost.begin(), cost.end(), comp);
+    
+    for(int i=0; i<N; ++i){
+        for(int j=cost[i].second; j-cost[i].second<= C; ++j){
+            DP[j] = min(DP[j-cost[i].second] + cost[i].first, DP[j]);
         }
     }
     
-    printf("%d\n", DP[C]);
+    for(int i=C; i<1500; ++i)
+        min_val = min(DP[i], min_val);
+    
+    printf("%d\n", min_val);
     
     return 0;
 }
