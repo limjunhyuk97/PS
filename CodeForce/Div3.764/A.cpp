@@ -22,8 +22,25 @@ using namespace std;
 
 typedef long long int ll;
 
+int t, n, M=-1,m=2000000000, cnt = 0;
+int arr[53];
+
 int main(void){
     
+    scanf("%d", &t);
+    while(t--){
+        for(int i=0; i<53; ++i) arr[i] = 0;
+        M=-1; m=2000000000;
+        scanf("%d", &n);
+        for(int i=0; i<n; ++i) {
+            scanf("%d", &arr[i]);
+            if(M < arr[i]) M = arr[i];
+            if(m > arr[i]) m = arr[i];
+        }
+    
+        printf("%d\n", M-m);
+        
+    }
     
     
     return 0;
