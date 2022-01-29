@@ -2,11 +2,16 @@
 #include <iostream>
 using namespace std;
 
+// 중복된 3을 하나로
+string compress(string str){
+    for(int i)
+}
+
 int main(void){
     
-    string str = "hello";
+    string example = "1113333444--33";
     
-    cout << *(str.end()-1);
+    cout << compress(example);
     
     return 0;
 }
