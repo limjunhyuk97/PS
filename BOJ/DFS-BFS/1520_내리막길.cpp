@@ -1,95 +1,46 @@
-// 그냥 BFS - 시간초과
-// 들어가는 inflow 0인 놈들만 BFS - 시간초과
-// 10억 개에 육박하는 경로의 수를 세는 것 -> 각 위치 기준으로 한번씩 셀 수 있도록 바꿀 수 있을까?
+// 너무 좋은 문제..! : DFS와 DP로 경로탐색 최적화
 
+// 그냥 BFS -> 오답
+// 들어가는 inflow 0인 놈들만 차례대로 뽑아내기 -> priority_queue의 pop 갱신이 되지 않아서 불가능했었음 -> 오답
+// 그렇다면 DFS...? -> DFS + DP를 이용하면 "경로떡밥회수"가 가능하다 !!!
+//  - 경로에 대한 고려를 (시작지점 ~ 특정지점)까지 도달가능한 경로 수에 대한 고려가 아니라
+//  - (특정지점 ~ 종말지점)로 도달가능한 경로 수에 대한 고려로 진행
+//  - 즉, "DFS + DP(top-down)" 으로 떡밥 회수를 진행한다.
+//      - DFS만 이용 : 전체 가능한 경로를 일일이 다 세는 것. 즉, 경로 기준 횟수 연산.
+//      - DFS + DP(top-down) : 경로 기준 횟수 연산 -> 칸 기준 횟수 연산
 
 #include <iostream>
-#include <algorithm>
-#include <set>
-#include <queue>
-#include <vector>
 using namespace std;
 
-typedef pair<int, int> coordinate;
+int grid[505][505], DP[505][505];
+int dx[4]={0, 0, 1, -1};
+int dy[4]={-1, 1, 0, 0};
+int N, M;
 
-int N, M, grid[505][505];
-int inflow[505][505];
-int dx[4] = {0, 0, 1, -1};
-int dy[4] = {1, -1, 0, 0};
-
-void calculateInflow(){
-    queue<coordinate> tmpQue; tmpQue.push({0, 0});
-    set<coordinate> onPath; onPath.insert({0, 0});
-    // BFS
-    while(!tmpQue.empty()){
-        coordinate cur=tmpQue.front(); tmpQue.pop();
-        for(int i=0; i<4; ++i){
-            int x=cur.first+dx[i], y=cur.second+dy[i];
-            if(x<0 || y<0 || x>=M || y>=N) continue;
-            if(grid[cur.first][cur.second]>grid[x][y]){
-                tmpQue.push({x, y});
-                onPath.insert({x, y});
-            }
-        }
+int DFS(int m, int n){
+    if(m==M-1 && n==N-1) return 1;
+    if(DP[m][n]!=-1) return DP[m][n];
+    DP[m][n]=0;
+    for(int i=0; i<4; ++i){
+        int nx=m+dx[i], ny=n+dy[i];
+        if(nx<0 || ny<0 || nx>=M || ny>=N) continue;
+        if(grid[m][n]>grid[nx][ny]) DP[m][n] += DFS(nx, ny);
     }
-    for(auto iter=onPath.begin(); iter!=onPath.end(); ++iter){
-        for(int i=0; i<4; ++i){
-            int x=(*iter).first+dx[i], y=(*iter).second+dy[i];
-            if(x<0 || y<0 || x>=M || y >= N) continue;
-            if(onPath.find({x,y})!=onPath.end() && grid[(*iter).first][(*iter).second]<grid[x][y]){
-                inflow[(*iter).first][(*iter).second] += 1;
-            }
-        }
-    }
-}
-
-int BFS(){
-    
-    struct node{
-        int x; int y;
-        bool operator<(const node &other) const{
-            // inflow가 작을수록 먼저 pq 빠져나오도록 고려
-            return inflow[x][y] > inflow[other.x][other.y];
-        }
-    };
-    priority_queue<node> pq;
-    
-    int path[505][505];
-    for(int i=0; i<505; ++i){
-        for(int j=0; j<505; ++j){
-            path[i][j]=0;
-            if(inflow[i][j]!=0) pq.push({i, j});
-        }
-    }
-    path[0][0]=1; pq.push({0, 0});
-    
-    while(!pq.empty()){
-        node cur = pq.top();
-        for(int i=0; i<4; ++i){
-            int nextX=cur.x+dx[i], nextY=cur.y+dy[i];
-            if(nextX<0 || nextY<0 || nextX>=M || nextY>=N) continue;
-            inflow[nextX][nextY] -= 1;
-            path[nextX][nextY] += path[cur.x][cur.y];
-        }
-        pq.pop();
-    }
-    
-    return path[M-1][N-1];
+    return DP[m][n];
 }
 
 int main(void){
-        
+    
     scanf("%d %d", &M, &N);
     for(int i=0; i<M; ++i){
         for(int j=0; j<N; ++j){
             scanf("%d", &grid[i][j]);
+            DP[i][j]=-1;
         }
     }
     
-    // inflow 연산
-    calculateInflow();
-    
-    printf("%d\n", BFS());
+    printf("%d\n", DFS(0, 0));
     
     return 0;
 }
+
