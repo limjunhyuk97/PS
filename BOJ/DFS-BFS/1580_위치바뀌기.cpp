@@ -1,52 +1,28 @@
 #include <iostream>
-#define INF 2000000000
+#include <queue>
 using namespace std;
 
 struct coordinate{
     int x;
     int y;
-    bool operator==(const coordinate & other){
-        return x==other.x && y==other.y;
-    }
 };
 
-int N, M, len=INF;
-int dx[8]={1, 0, 1, -1, 1, -1, 0, -1};
-int dy[8]={1, 1, 0, 1, -1, 0, -1, -1};
-char grid[25][25];
-bool checkA[24][24], checkB[24][24];
-coordinate A, B;
+struct node{
+    coordinate cur;
+    char
+}
 
-void DFS(coordinate a, coordinate b, int n){
-    if(n > len) return;
-    if(a==B && b==A){
-        if(len>n) len=n;
-        return;
-    }
-    for(int i=0; i<8; ++i){
-        coordinate nextA={a.x+dx[i], a.y+dy[i]};
-        if(checkA[nextA.x][nextA.y] || nextA.x<0 || nextA.x>=N || nextA.y<0 || nextA.y>=M || grid[nextA.x][nextA.y]=='X' || checkA[nextA.x][nextA.y]) continue;
-        if(a==B) {
-            nextA = a;
-            goto skipA;
-        }
-        checkA[nextA.x][nextA.y]=true;
-        skipA:
-        for(int j=0; j<8; ++j){
-            coordinate nextB={b.x+dx[j], b.y+dy[j]};
-            if(b==A){
-                nextB=b;
-                goto skipB;
-            }
-            if(checkB[nextB.x][nextB.y] || nextB.x<0 || nextB.x>=N || nextB.y<0 || nextB.y>=M || grid[nextB.x][nextB.y]=='X' || checkB[nextB.x][nextB.y]) continue;
-            if( (b==nextA && nextB==a) || nextA==nextB) continue;
-            skipB:
-            checkB[nextB.x][nextB.y]=true;
-            DFS(nextA, nextB, n+1);
-            checkB[nextB.x][nextB.y]=false;
-        }
-        checkA[nextA.x][nextA.y]=false;
-    }
+coordinate defaultA, defaultB;
+char grid[22][22];
+int N, M, cnt;
+int dx[8]={1, 1, 0, 1, -1, 0, -1, -1};
+int dy[8]={1, 0, 1, -1, 1, -1, 0, -1};
+
+void BFS(){
+    coordinate curA=defaultA, curB=defaultB;
+    queue<coordinate> tmpQue;
+    tmpQue.push(curA);
+    
 }
 
 int main(void){
@@ -55,16 +31,15 @@ int main(void){
     for(int i=0; i<N; ++i){
         scanf("%s", &grid[i]);
         for(int j=0; j<M; ++j){
-            if(grid[i][j]=='A') A={i,j};
-            if(grid[i][j]=='B') B={i,j};
+            if(grid[i][j]=='A') defaultA={i, j};
+            if(grid[i][j]=='B') defaultB={i, j};
         }
     }
     
-    checkA[A.x][A.y]=true; checkB[B.x][B.y]=true;
-    DFS(A, B, 0);
+    BFS();
     
-    if(len==INF) printf("-1\n");
-    else printf("%d\n",len);
+    if(cnt==0) printf("-1\n");
+    else printf("%d\n", cnt);
     
     return 0;
 }
