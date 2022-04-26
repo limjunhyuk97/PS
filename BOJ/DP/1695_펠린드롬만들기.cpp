@@ -1,32 +1,42 @@
-// 펠린드롬과 DP
-// DP[n][m]에서의 펠린드롬 여부 체크
-// DP[n-1][m+1]에서의 펠린드롬 여부 체크로 그대로 가져간다.
+// ====================== 펠린드롬 ====================== //
+// 1. 뒤집어봤을 때 일치하는지 여부를 확인
+// 2. 투포인터를 사용하여 "시작 부분-> / <-종료 부분" 으로 순회하면서 확인. 문자열/2 에 도달하면 종료
+// 3. 가운데부터 시작하면서 대칭적으로 일치하는지 "<-시작부분 / 종료부분->" 으로 순회하면서 확인. 문자열 끝까지 도달하면 종료
+
+
+// ====================== 풀이 ====================== //
+// (1) LCS 구하기
+// DP[i][j] =
+// {
+//      DP[i-1][j-1]+1 : 이전행, 동일열 문자열에 같은 문자가 존재한다면,
+//      max(DP[i-1][j-1], DP[i][j-1]) : 이전행, 동일열 문자열에 다른 문자가 존재한다면
+// }
+
+// (2) 문자열 뒤집어서 겹치는 문자열을 LCS로 찾고 겹치지 않는수만큼 문자를 추가하면 됨
 
 #include <iostream>
-#include <string>
+#include <algorithm>
 using namespace std;
 
-int N, pal[5005];
-int cnt;
-
-// DP Logic : s와 t를 추가로 고려해야 한다는 뜻
-void checkPAL(int s, int t, bool odd) {
-
-    
-    
-}
+int N, arr1[5005], arr2[5005], DP[5005][5005];
 
 int main(void){
     
     scanf("%d", &N);
-    for(int i=0; i<N; ++i)
-        scanf("%d", &pal[i]);
+    for(int i=1; i<=N; ++i) {
+        int in; scanf("%d", &in);
+        arr1[i] = in;
+        arr2[N+1-i] = in;
+    }
     
-    if(N>2 && N%2 == 0) checkPAL(N/2-1, N/2, false);
-    if(N>2 && N%2 == 1) checkPAL(N/2-1, N/2+1, true);
-    if(N==2 && pal[0] != pal[1]) cnt = 1;
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            if(arr1[j] == arr2[i]) DP[i][j] = DP[i-1][j-1] + 1;
+            else DP[i][j] = max(DP[i][j-1], DP[i-1][j]);
+        }
+    }
     
-    printf("%d\n", cnt);
+    printf("%d\n", N - DP[N][N]);
     
     return 0;
 }
