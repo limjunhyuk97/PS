@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// N 진법으로 변환하는 함수
 string changeNum(int num, int k){
     string converted = "";
     
@@ -16,6 +17,7 @@ string changeNum(int num, int k){
     return converted;
 }
 
+// 소수 판별 함수
 int isPrime(const string &str) {
     long long int dec = stol(str);
     if(dec == 1) return 0;
@@ -25,6 +27,7 @@ int isPrime(const string &str) {
     return 1;
 }
 
+// 문자열 파싱 (중간에 들어있는 '0' 제외하고 문자열 뜯어냄)
 vector<string> parse(const string &target, const string &del) {
     vector<string> result;
     int cur_pos = 0;
