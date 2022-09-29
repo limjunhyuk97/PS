@@ -6,13 +6,12 @@
 
 using namespace std;
 
-// N 진법으로 변환하는 함수
-string changeNum(int num, int k){
-    string converted = "";
-    
-    for(int i = num; i > 0; ){
-        converted = to_string(i % k) + converted;
-        i /= k;
+// num의 10진법 수를 k진법으로 변환한다.
+string changeNumSys(int num, int k) {
+    string converted;  // 변환된 수를 저장한다.
+    while(num) {
+        converted = to_string(num % k) + converted;  // k로 나눈 나머지를 계속 앞에다 추가한다.
+        num /= k;
     }
     return converted;
 }
