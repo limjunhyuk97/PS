@@ -18,8 +18,10 @@ bool checked[1002][1002];
 queue<coord> burn;
 queue<coord> jh;
 
+// 불의 이동에 대한 고려
 bool check_fire_coordinate(int x, int y, int x_bound, int y_bound) {
     if((x >= 0 && x < x_bound) && (y >= 0 && y < y_bound)) {
+        // 불이 이미 붙었거나, 벽이라면 불 붙이기 그만.
         if(hazard[x][y] != 0) return false;
         return true;
     }
@@ -27,9 +29,12 @@ bool check_fire_coordinate(int x, int y, int x_bound, int y_bound) {
 }
 
 bool check_jh_coordinate(int x, int y, int x_bound, int y_bound, int move_count) {
+    // 갔던길은 다시 가지 마라. 막힌길을 가지마라.
     if(checked[x][y] || hazard[x][y] == BLOCKED) return false;
     if((x >= 0 && x < x_bound) && (y >= 0 && y < y_bound)) {
+        // 불이 애초에 없는 경우를 0으로 설정함. 그떄는 가라.
         if(hazard[x][y]==0) return true;
+        // 불이 이미 붙었다면 가지마라.
         if(move_count >= hazard[x][y]) return false;
         else return true;
     }
@@ -55,6 +60,7 @@ int main(void) {
     }
     
     // movement
+    // 불이 없는 경우를 0으로 했기 때문에 0으로 시작하면 틀린다.
     int fire_movement = 1;
     int jh_movement = 1;
     
