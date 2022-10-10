@@ -52,6 +52,8 @@
     - cmp없는 int 정렬 : 오름차순
 
 ```
+#include <algorithm>
+
 bool cmp(const p &p1, const p &p2) {
     if(p2.first == p1.second) return p1.second > p2.second;
     else return p1.first > p2.first;
@@ -66,10 +68,42 @@ sort(v.begin(), v.end(), cmp);
  - unique를 사용하면 v를 순회하면서 연속으로 등장하는 놈들을 뒤로 밀어버리고, 뒤로 밀어버린 부분의 첫 부분의 iterator를 반환한다.
  - v.erase() 를 통해서 뒤에를 날려버린다.
  
+```cpp
+#include <algorithm>
+#include <vector>
+
+template <typename T>
+void compressContainer(vector<T>& v) {
+    sort(v.begin(), v.end());
+    v.erase(unique(v.begin(), v.end()), v.end());
+}
+
+compressContainer(v);
 ```
-sort(v.begin(), v.end());
-v.erase( unique(v.begin(), v.end()), v.end() )
+
+## 벡터 내 원소 이진 탐색
+ - 벡터 내부가 정렬 되어 있는 경우에 효과가 있음
+ - upper_bound(v.begin(), v.end(), target) : target **이상**의 값이 처음 등장하는 위치의 iterator 값 반환
+ - lower_bound(v.begin(), v.end(), target) : target **초과**의 값이 처음 등장하는 위치의 iterator 값 반환
+
+```cpp
+vector<int> v;
+
+// 처음 등장한 n 이상의 값 인덱스
+lower_bound(v.begin(), v.end(), n) - v.begin();
+
+// 처음 등장한 n 초과의 값 인덱스
+upper_bound(v.begin(), v.end(), n) - v.begin();  
 ```
+
+## 벡터 내 n이상 m이하 값의 수 찾기
+ - upper_bound와 lower_bound STL 함수를 이용한다.
+ 
+```cpp
+// n 이상 m 이하의 값 찾기
+upper_bound(v.begin(), v.end(), m) - lower_bound(v.begin(), v.end(), n);
+```
+
 
 ## 테스트 공간
 
