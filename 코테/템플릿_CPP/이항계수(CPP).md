@@ -98,7 +98,64 @@ int main(void) {
 - 분할정복, 페르마 정리, 합동정리로도 감당할 수 없는 수의 범위일 때 사용할 수 있다.
     - 위의 방법들은 n!이 기본적으로 감당할 때 사용할 수 있다.
     - 만약 **n!이 감당할 수 없게 크다면 어떻게 할 것인가?**
+    - **mod P일 경우, P로 n과 k를 진법변환 한 뒤, nCk를 작은 조합들의 곱으로 바꾼다.**
+- **NCK에서 N과 K를 p 진법으로 진법 변환한다.**
+    - N = Nm \* p^(m) + Nm-1 \* p^(m-1) + Nm-2 \* p^(m-2) + ...
+    - K = Km \* p^(m) + Km-1 \* p^(m-1) + Km-2 \* p^(m-2) + ...
+- 이 때, **NCK = NmCKm \* Nm-1CKm-1 \* Nm-2CKm-2 \* ... (mod P)**와 같다.
+
 
 ```cpp
+#include <iostream>
+#include <deque>
+#include <cmath>
+using namespace std;
+
+typedef long long int ll;
+
+ll N, K, M;
+
+// 진법 변환
+void conversion(deque<int> & dq, ll num, ll dest) {
+    while(num) {
+        dq.push_front((int)(num % dest));
+        num /= dest;
+    }
+}
+
+// 이항계수
+int DP[2005][2005];
+int solve(int N, int K, int M) {
+    int *ret = &DP[N][K];
+    if(*ret) return *ret;
+    if(N==K || K==0) return 1;
+    if(N==0) return 0;
+    *ret = (solve(N-1, K-1, M) +solve(N-1, K, M)) % M;
+    return *ret;
+}
+
+int main(void) {
+    
+    scanf("%lld %lld %lld", &N, &K, &M);
+    
+    deque<int> NtoM, KtoM;
+    conversion(NtoM, N, M);
+    conversion(KtoM, K, M);
+    
+    // 앞자리 0 맞추기
+    int gap = (int)(NtoM.size()-KtoM.size());
+    for(int i=0; i<gap; ++i) KtoM.push_front(0);
+    
+    // 뤼카 정리 사용한 계산
+    int res = 1;
+    for(int i=0; i<NtoM.size(); ++i) {
+        res *= solve(NtoM[i], KtoM[i], (int)M);
+        res %= M;
+    }
+    
+    printf("%d\n", res);
+    
+    return 0;
+}
 
 ```
