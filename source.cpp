@@ -1,72 +1,45 @@
-// 부모-> 자식 그래프 생성 (vector)
-// 자식-> 부모 관계 생성 (array)
+// 23296번 풀이중
+
 #include <iostream>
-#include <algorithm>
-#include <vector>
 #include <queue>
-#define MAX_LEN 103
+#include <vector>
+#define MAX_LEN 100003
 using namespace std;
 
-int n, a, b, relation, final_dist;
-vector<int> child[MAX_LEN];
-int parent[MAX_LEN];
-bool visited[MAX_LEN];
+int N;
+int graph[MAX_LEN];
+bool moved[MAX_LEN];
+int in[MAX_LEN];
 
-void BFS(int cur, int *dist) {
-    if(visited[cur]) return;
-    visited[cur] = true;
+priority_queue<pair<int,int> > pq;
+vector<int> ans;
+
+void dfs() {
+    int cur = 1;
     
-    queue<int> q;
-    q.push(cur);
-    
-    int cnt = 0;
-    while(!q.empty()) {
-        int size = (int)q.size();
-        for(int i=0; i<size; ++i) {
-            int cur = q.front();
-            q.pop();
-            
-            visited[cur] = true;
-            if(cur == b) {
-                *dist = cnt;
-                return;
-            }
-            
-            for(int i=0; i<child[cur].size(); ++i) {
-                if(visited[child[cur][i]]) continue;
-                q.push(child[cur][i]);
-            }
+    while(!pq.empty()) {
+        while(!moved[cur]) {
+            ans.push_back(graph[cur]);
+            moved[cur] = true;
+            cur = graph[cur];
+            in[cur] -= 1;
         }
-        cnt += 1;
+        while(!pq.empty()) {
+            
+        }
     }
-    *dist = -1;
 }
 
 int main(void) {
     
-    scanf("%d", &n);
-    scanf("%d %d", &a, &b);
-    scanf("%d", &relation);
-    
-    fill(&parent[0], &parent[MAX_LEN], -1);
-    for(int i=0; i<relation; ++i) {
-        int p, c;
-        scanf("%d %d", &p, &c);
-        parent[c] = p;
-        child[p].push_back(c);
+    scanf("%d", &N);
+    for(int i=1; i<=N; ++i) {
+        int destination; scanf("%d", &destination);
+        graph[i] = destination;
+        in[destination] += 1;
     }
     
-    for(int cur=a, upper=0; ; cur = parent[cur], upper++) {
-        if(cur == -1) break;
-        int dist = 0;
-        BFS(cur, &dist);
-        if(dist != -1) {
-            final_dist = upper + dist;
-            break;
-        }
-    }
-    
-    printf("%d\n", final_dist == 0 ? -1 : final_dist);
+    dfs();
     
     return 0;
 }
