@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 using namespace std;
 
 typedef pair<int, int>  XY;
@@ -80,15 +79,4 @@ vector<int> solution(vector<string> grid) {
     sort(answer.begin(), answer.end());
     
     return answer;
-}
-
-int main(void) {
-    
-    vector<string> grid;
-    grid.push_back("R");
-    grid.push_back("R");
-    
-    for(auto i : solution(grid)) cout << i << endl;
-    
-    return 0;
 }
