@@ -1,3 +1,5 @@
+// 좌,우,위,아래에 대한 압축을 어떻게 구현할 것인가?
+
 #include <iostream>
 #include <vector>
 #define MAXLEN 25
