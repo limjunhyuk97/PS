@@ -1,3 +1,6 @@
+// 로직 상에서의 문제 찾는데 시간 오래 걸림
+// : '640'이라는 문자열이 찾아지더라도, 그 안에서 64를 또 추출할 수 있어야 함..!
+
 #include <iostream>
 #include <string>
 using namespace std;
