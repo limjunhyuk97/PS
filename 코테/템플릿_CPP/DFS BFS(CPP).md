@@ -16,7 +16,9 @@ vector<int> graph[MAX_LEN];
 bool visited[MAX_LEN];
 
 void dfs(int cur) {
+    // [조심!] stack에 들어가는 순간 true 처리!
     visited[cur] = true;
+    
     for(int i=0; i<graph[cur].size(); ++i) {
         int next = graph[cur][i];
         if(!visited[next])
@@ -48,7 +50,7 @@ bool visited[MAX_LEN];
 
 void bfs(int cur) {
     
-    // [조심!] queue에 들어가는 순간 true 처리! -> queue에서 꺼내 보는 것들은 중복되어 봐지지 않는다.
+    // [조심!] queue에 들어가는 순간 true 처리!
     visited[cur] = true;
     q.push(cur);
     

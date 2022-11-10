@@ -1,3 +1,4 @@
+// 세그먼트 트리
 #include <iostream>
 #include <vector>
 #define MAX_BUFFER 1000005
