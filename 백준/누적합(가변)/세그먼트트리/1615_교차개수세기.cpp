@@ -1,3 +1,6 @@
+// 구간의 합을 어떻게 빠르게 구할 것인가?
+// 한쪽을 정렬하고 다른쪽을 세는 작업
+
 #include <iostream>
 #include <algorithm>
 #include <vector>
