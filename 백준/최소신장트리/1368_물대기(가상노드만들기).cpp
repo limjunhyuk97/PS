@@ -1,4 +1,5 @@
 // 가상의 노드 만들기
+// MST 구할 때, 각 노드에도 cost가 달려있다면, 각 노드들에 모두 연결되어 있는 가상의 노드를 다는 방식도 생각해볼 수 있다.
 
 #include <iostream>
 #include <algorithm>
