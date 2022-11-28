@@ -37,11 +37,15 @@ void union_parent(int n, int m) {
 }
 
 int kruskal() {
+    // forest 생성
     for(int i=0; i<MAXLEN; ++i){
         parent[i] = i;
     }
+    
+    // edge 정렬
     sort(edges.begin(), edges.end());
     
+    // 모든 edge에 대해서 선택 실시
     int cost = 0;
     for(int i=0; i<(int)edges.size(); ++i) {
         int a = edges[i].a;
