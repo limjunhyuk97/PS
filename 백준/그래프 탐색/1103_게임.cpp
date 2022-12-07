@@ -1,5 +1,4 @@
-// DFS와 사이클 판별 -> DFS는 시간 초과를 낸다.
-// BFS + 상태 저장 을 통해서 돌려야 할 듯 함.
+// 벨만포드의 사이클 탐색 원리를 이용하여 구함.
 #include <iostream>
 #include <algorithm>
 #include <queue>
@@ -21,7 +20,7 @@ bool OOB(int x, int y) {
 }
 
 // 사이클 탐지 로직을 위해 벨만포드의 원리를 사용
-int BFS() {
+int Search() {
     // dist 초기화
     for(int i=0; i<MAXLEN; ++i) {
         for(int j=0; j<MAXLEN; ++j) {
@@ -89,7 +88,7 @@ int main(void) {
         }
     }
     
-    printf("%d\n", BFS());
+    printf("%d\n", Search());
     
     return 0;
 }
