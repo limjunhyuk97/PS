@@ -1,12 +1,14 @@
-# 우선순위 큐 (priority queue)
-
-- max heap, min heap을 기반으로 구현한다.
-
-## 우선순위 큐
-
-```js
-// 우선순위큐 구현.
-// 우선순위는 루트가 제일 크다.
+// --> input
+const submission = "/dev/stdin";
+const testcase = "./testcase.txt";
+let fs = require("fs");
+const input = fs
+  .readFileSync(submission)
+  .toString()
+  .trim()
+  .split("\n")
+  .map((el) => Number(el));
+// <-- input
 
 class PriorityQueue {
   constructor(n, comp) {
@@ -72,4 +74,24 @@ class PriorityQueue {
     return result;
   }
 }
-```
+
+const N = input[0];
+const arr = input.slice(1);
+
+const PQ = new PriorityQueue(N + 3, (a, b) => b - a);
+arr.forEach((el) => {
+  PQ.push(el);
+});
+
+let answer = 0;
+
+while (true) {
+  const i = PQ.pop();
+  if (PQ.isEmpty()) {
+    console.log(answer);
+    break;
+  }
+  const j = PQ.pop();
+  PQ.push(i + j);
+  answer += i + j;
+}
