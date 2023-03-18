@@ -16,7 +16,7 @@ struct co {
 
 int N, K, L;
 
-// turn이 10000번까지 있을 수 있다는 점 놓침
+// !!!turn이 10000번까지 있을 수 있다는 점 놓침!!!
 bool apples[105][105];
 char turns[10005];
 int heading = 0;
@@ -96,7 +96,7 @@ int main(void) {
             co back = track_deq.back(); track_deq.pop_back();
             track_set.erase(back);
         }
-        // 사과 있으면 먹는다.
+        // !!!사과 있으면 먹는 것 놓침!!!
         else apples[cur.x][cur.y] = false;
         
         // 방향을 설정한다.
