@@ -29,6 +29,32 @@
 		B1527DA728F095F400E9F427 /* 프로그래머스 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "프로그래머스"; sourceTree = "<group>"; };
 		B1527DA828F095F400E9F427 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B15F39AE28E283900004188F /* PS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PS; sourceTree = BUILT_PRODUCTS_DIR; };
+		B19B797429C94BDD00D512B4 /* 우선순위큐(priority_queue).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "우선순위큐(priority_queue).md"; sourceTree = "<group>"; };
+		B19B797529C94BDD00D512B4 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
+		B19B797629C94BDD00D512B4 /* 트리(tree).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "트리(tree).md"; sourceTree = "<group>"; };
+		B19B797729C94BDD00D512B4 /* 큐(queue).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "큐(queue).md"; sourceTree = "<group>"; };
+		B19B797829C94BDD00D512B4 /* 스택(stack).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "스택(stack).md"; sourceTree = "<group>"; };
+		B19B797929C94BDD00D512B4 /* DFS BFS(JS).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DFS BFS(JS).md"; sourceTree = "<group>"; };
+		B19B797B29C94BDD00D512B4 /* 진법 변환(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "진법 변환(CPP).md"; sourceTree = "<group>"; };
+		B19B797C29C94BDD00D512B4 /* 플로이드워셜(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "플로이드워셜(CPP).md"; sourceTree = "<group>"; };
+		B19B797D29C94BDD00D512B4 /* 벡터(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "벡터(CPP).md"; sourceTree = "<group>"; };
+		B19B797E29C94BDD00D512B4 /* 이분탐색(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "이분탐색(CPP).md"; sourceTree = "<group>"; };
+		B19B797F29C94BDD00D512B4 /* 위상정렬(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "위상정렬(CPP).md"; sourceTree = "<group>"; };
+		B19B798029C94BDD00D512B4 /* 맵(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "맵(CPP).md"; sourceTree = "<group>"; };
+		B19B798129C94BDD00D512B4 /* 문자열파싱(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "문자열파싱(CPP).md"; sourceTree = "<group>"; };
+		B19B798229C94BDD00D512B4 /* 다익스트라(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "다익스트라(CPP).md"; sourceTree = "<group>"; };
+		B19B798329C94BDD00D512B4 /* DP(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DP(CPP).md"; sourceTree = "<group>"; };
+		B19B798429C94BDD00D512B4 /* 최대공약수 최소공배수(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "최대공약수 최소공배수(CPP).md"; sourceTree = "<group>"; };
+		B19B798529C94BDD00D512B4 /* 이항계수(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "이항계수(CPP).md"; sourceTree = "<group>"; };
+		B19B798629C94BDD00D512B4 /* 소수 판별(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "소수 판별(CPP).md"; sourceTree = "<group>"; };
+		B19B798729C94BDD00D512B4 /* 벨만포드(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "벨만포드(CPP).md"; sourceTree = "<group>"; };
+		B19B798829C94BDD00D512B4 /* 좌표 압축(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "좌표 압축(CPP).md"; sourceTree = "<group>"; };
+		B19B798929C94BDD00D512B4 /* DFS BFS(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "DFS BFS(CPP).md"; sourceTree = "<group>"; };
+		B19B798A29C94BDD00D512B4 /* 사이클판별(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "사이클판별(CPP).md"; sourceTree = "<group>"; };
+		B19B798B29C94BDD00D512B4 /* 최소신장트리(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "최소신장트리(CPP).md"; sourceTree = "<group>"; };
+		B19B798C29C94BDD00D512B4 /* 누적합(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "누적합(CPP).md"; sourceTree = "<group>"; };
+		B19B798D29C94BDD00D512B4 /* 분리집합(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "분리집합(CPP).md"; sourceTree = "<group>"; };
+		B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "행렬 연산(CPP).md"; sourceTree = "<group>"; };
 		B1AA253528F45F2F00D933F8 /* source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = source.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,9 +77,51 @@
 				B1527DA428F095F400E9F427 /* 코테 */,
 				B1527DA628F095F400E9F427 /* 템플릿 */,
 				B1527DA728F095F400E9F427 /* 프로그래머스 */,
-				B1527DA828F095F400E9F427 /* README.md */,
+				B19B797A29C94BDD00D512B4 /* 유형_CPP_VER */,
+				B19B797329C94BDD00D512B4 /* 유형_JS_VER */,
 				B15F39AE28E283900004188F /* PS */,
+				B1527DA828F095F400E9F427 /* README.md */,
 			);
+			sourceTree = "<group>";
+		};
+		B19B797329C94BDD00D512B4 /* 유형_JS_VER */ = {
+			isa = PBXGroup;
+			children = (
+				B19B797429C94BDD00D512B4 /* 우선순위큐(priority_queue).md */,
+				B19B797529C94BDD00D512B4 /* test.js */,
+				B19B797629C94BDD00D512B4 /* 트리(tree).md */,
+				B19B797729C94BDD00D512B4 /* 큐(queue).md */,
+				B19B797829C94BDD00D512B4 /* 스택(stack).md */,
+				B19B797929C94BDD00D512B4 /* DFS BFS(JS).md */,
+			);
+			path = "유형_JS_VER";
+			sourceTree = "<group>";
+		};
+		B19B797A29C94BDD00D512B4 /* 유형_CPP_VER */ = {
+			isa = PBXGroup;
+			children = (
+				B19B797B29C94BDD00D512B4 /* 진법 변환(CPP).md */,
+				B19B797C29C94BDD00D512B4 /* 플로이드워셜(CPP).md */,
+				B19B797D29C94BDD00D512B4 /* 벡터(CPP).md */,
+				B19B797E29C94BDD00D512B4 /* 이분탐색(CPP).md */,
+				B19B797F29C94BDD00D512B4 /* 위상정렬(CPP).md */,
+				B19B798029C94BDD00D512B4 /* 맵(CPP).md */,
+				B19B798129C94BDD00D512B4 /* 문자열파싱(CPP).md */,
+				B19B798229C94BDD00D512B4 /* 다익스트라(CPP).md */,
+				B19B798329C94BDD00D512B4 /* DP(CPP).md */,
+				B19B798429C94BDD00D512B4 /* 최대공약수 최소공배수(CPP).md */,
+				B19B798529C94BDD00D512B4 /* 이항계수(CPP).md */,
+				B19B798629C94BDD00D512B4 /* 소수 판별(CPP).md */,
+				B19B798729C94BDD00D512B4 /* 벨만포드(CPP).md */,
+				B19B798829C94BDD00D512B4 /* 좌표 압축(CPP).md */,
+				B19B798929C94BDD00D512B4 /* DFS BFS(CPP).md */,
+				B19B798A29C94BDD00D512B4 /* 사이클판별(CPP).md */,
+				B19B798B29C94BDD00D512B4 /* 최소신장트리(CPP).md */,
+				B19B798C29C94BDD00D512B4 /* 누적합(CPP).md */,
+				B19B798D29C94BDD00D512B4 /* 분리집합(CPP).md */,
+				B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */,
+			);
+			path = "유형_CPP_VER";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
