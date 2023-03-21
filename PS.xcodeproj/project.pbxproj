@@ -23,6 +23,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B125975629C94CB400742EC1 /* 그리디(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "그리디(CPP).md"; sourceTree = "<group>"; };
+		B125975729C94EF000742EC1 /* 백트래킹(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "백트래킹(CPP).md"; sourceTree = "<group>"; };
 		B1527DA428F095F400E9F427 /* 코테 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "코테"; sourceTree = "<group>"; };
 		B1527DA528F095F400E9F427 /* 백준 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "백준"; sourceTree = "<group>"; };
 		B1527DA628F095F400E9F427 /* 템플릿 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "템플릿"; sourceTree = "<group>"; };
@@ -120,6 +122,8 @@
 				B19B798C29C94BDD00D512B4 /* 누적합(CPP).md */,
 				B19B798D29C94BDD00D512B4 /* 분리집합(CPP).md */,
 				B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */,
+				B125975629C94CB400742EC1 /* 그리디(CPP).md */,
+				B125975729C94EF000742EC1 /* 백트래킹(CPP).md */,
 			);
 			path = "유형_CPP_VER";
 			sourceTree = "<group>";
