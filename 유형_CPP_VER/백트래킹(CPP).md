@@ -9,7 +9,7 @@
 
 - 대상 집합으로 만들 수 있는 순열, 조합의 가능성인 state space tree를 DFS로 순회한다.
 
-<img width="292" alt="image" src="https://user-images.githubusercontent.com/59442344/226506301-e2b59d78-b513-4375-b3dc-c77d336904b3.png">
+<img width="970" alt="image" src="https://user-images.githubusercontent.com/59442344/226506462-fd0fad70-d384-4086-a921-b732cf5345ba.png">
 
 
 
