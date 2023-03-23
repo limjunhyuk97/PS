@@ -20,6 +20,24 @@
 - 기준값 < mid값 : right = mid - 1
 - mid값 <= 기준값 : left = mid + 1
 
+### [STL] lower_bound, upper_bound
+
+- 배열은 기본적으로 정렬되어 있어야 함
+- algorithm 라이브러리 include 필요
+- lower_bound : **찾고자 하는 값 n 이상의 숫자**가 몇 번째 인덱스에서 처음으로 등장하는지 찾기
+- upper_bound : **찾고자 하는 값 n 초과의 숫자**가 몇 번째 인덱스에서 처음으로 등장하는지 찾기
+
+```cpp
+// arr에서 5 초과하는 수가 몇번째 인덱스에서 처음으로 나오는가
+cout << upper_bound(&arr[0], &arr[N], 5) - arr << endl;
+
+// arr에서 5 이상의 수가 몇번째 인덱스에서 처음으로 나오는가
+cout << lower_bound(&arr[0], &arr[N], 5) - arr << endl;
+
+// arr에서 5가 몇번 반복되는가
+cout << upper_bound(&arr[0], &arr[N], 5) - lower_bound(&arr[0], &arr[N], 5) << endl;
+```
+
 ## 최적화 문제를 결정 문제로
 
 - 최적의 값을 구하는 최적화 문제를 결정 문제로 바꿀 때 사용한다. 즉, **이분탐색의 대상을 결정하여 해결하는 문제**로 바꿀 수 있다.

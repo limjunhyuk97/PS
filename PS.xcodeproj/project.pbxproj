@@ -58,6 +58,7 @@
 		B19B798D29C94BDD00D512B4 /* 분리집합(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "분리집합(CPP).md"; sourceTree = "<group>"; };
 		B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "행렬 연산(CPP).md"; sourceTree = "<group>"; };
 		B1AA253528F45F2F00D933F8 /* source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = source.cpp; sourceTree = "<group>"; };
+		B1D2E97629CC361D00BC216C /* LIS(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "LIS(CPP).md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +125,7 @@
 				B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */,
 				B125975629C94CB400742EC1 /* 그리디(CPP).md */,
 				B125975729C94EF000742EC1 /* 백트래킹(CPP).md */,
+				B1D2E97629CC361D00BC216C /* LIS(CPP).md */,
 			);
 			path = "유형_CPP_VER";
 			sourceTree = "<group>";

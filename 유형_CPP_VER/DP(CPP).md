@@ -96,3 +96,15 @@ if((i%3==0) && (DP[i] > DP[i/3] + 1)) DP[i] = DP[i/3] + 1;
 ```cpp
 DP[n+단어길이] = min(DP[n] + 단어끼리 일치하지 않는 글자의 수, DP[n+단어길이]);
 ```
+
+### LIS [BOJ 11053]
+
+- DP[n] : 숫자 n을 끝으로 하는 가장 긴 LIS 길이
+- arr : 숫자 배열
+
+```cpp
+// arr의 이전 숫자들을 보며 갱신
+for(int j=0; j<i; ++j) {
+    if(tmp > arr[j]) DP[cur] = max(DP[cur], DP[arr[j]] + 1 );
+}
+```
