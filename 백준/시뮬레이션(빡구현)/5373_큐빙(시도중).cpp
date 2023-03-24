@@ -1,3 +1,4 @@
+// 큐브 돌리는 개같은 문제 시도중
 #include <iostream>
 #include <string>
 using namespace std;
