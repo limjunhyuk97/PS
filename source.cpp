@@ -1,117 +1,86 @@
 #include <iostream>
-#include <string>
+#include <queue>
+#define MAXLEN 105
 using namespace std;
 
-int T, n;
+typedef pair<int, int> co;
 
-// 0:w  1:y  2:h  3:o  4:g  5:b
-char cube[6][3][3];
+int N;
+int grid[MAXLEN][MAXLEN];
+bool visited[MAXLEN][MAXLEN];
 
-int faceToIndex(char face) {
-    if(face == 'U') return 0;
-    else if(face == 'D') return 1;
-    else if(face == 'F') return 2;
-    else if(face == 'B') return 3;
-    else if(face == 'L') return 4;
-    else return 5;
-}
+int minH = 105;
+int maxH = -1;
+int maxSafe = 1;
 
-void initCube() {
-    for(int i=0; i<3; ++i) {
-        for(int j=0; j<3; ++j) {
-            cube[0][i][j] = 'w';
-            cube[1][i][j] = 'y';
-            cube[2][i][j] = 'r';
-            cube[3][i][j] = 'o';
-            cube[4][i][j] = 'g';
-            cube[0][i][j] = 'b';
+int dx[4] = {-1, 0, 1, 0};
+int dy[4] = {0, 1, 0, -1};
+
+void initVisited() {
+    for(int i=0; i<MAXLEN; ++i) {
+        for(int j=0; j<MAXLEN; ++j) {
+            visited[i][j] = false;
         }
     }
 }
 
-void printU() {
-    for(int i=0; i<3; ++i) {
-        for(int j=0; j<3; ++j) {
-            printf("%c", cube[0][i][j]);
-        }
-        printf("\n");
-    }
+bool OOB(co node) {
+    int x = node.first;
+    int y = node.second;
+    if(x < 0 || y < 0 || x >=N || y >= N) return true;
+    else return false;
 }
 
-void face_clockwise(char face) {
-    int index = faceToIndex(face);
-    int tmp = cube[index][0][0];
-    for(int i=1; i<3; ++i) cube[index][i-1][0] = cube[index][i][0];
-    for(int i=1; i<3; ++i) cube[index][2][i-1] = cube[index][2][i];
-    for(int i=1; i>=0; --i) cube[index][i+1][2] = cube[index][i][2];
-    cube[index][0][2] = cube[index][0][1]; cube[index][0][1] = tmp;
-}
-
-void face_anticlockwise(char face) {
-    int index = faceToIndex(face);
-    int tmp = cube[index][0][0];
-    for(int i=1; i<3; ++i) cube[index][0][i-1] = cube[index][0][i];
-    for(int i=1; i<3; ++i) cube[index][i-1][2] = cube[index][i][2];
-    for(int i=1; i>=0; --i) cube[index][2][i+1] = cube[index][2][i];
-    cube[index][2][0] = cube[index][1][0]; cube[index][1][0] = tmp;
-}
-
-void side_clockwise(char face) {
-    switch(face) {
-        case 'B' :
-            
-            
-            break;
-            
-        case 'D':
-            break;
-            
-        case 'U' :
-            break;
-            
-        case 'L':
-            break;
-            
-        case 'U':
-            break;
-            
-        case 'F':
-            break;
-    }
-}
-
-void side_anticlockwise(char face) {
+void bfs(int x, int y, int h) {
+    co cur = {x, y};
     
-}
-
-// 바라보는 방향 기준 - : 반시계 , + : 시계
-void rotate(char face, char clock) {
-    if(clock == '+') {
-        face_clockwise(face);
-        side_clockwise(face);
-    } else {
-        face_anticlockwise(face);
-        side_anticlockwise(face);
+    queue<co> que;
+    que.push(cur);
+    
+    while(!que.empty()) {
+        co cur = que.front(); que.pop();
+        
+        for(int i=0; i<4; ++i) {
+            co next = {cur.first + dx[i], cur.second + dy[i]};
+            if(OOB(next) || grid[next.first][next.second] <=h || visited[next.first][next.second]) continue;
+            else {
+                que.push(next);
+                visited[next.first][next.second] = true;
+            }
+        }
     }
+    
 }
 
 int main(void) {
     
-    scanf("%d", &T);
+    scanf("%d", &N);
     
-    for(int t=0; t<T; ++t) {
-        initCube();
-        
-        scanf("%d", &n);
-        
-        // cin으로 여러개의 문자들을 띄어서 입력받을 수 있다.
-        for(int i=0; i<n; ++i) {
-            string cmd; cin >> cmd;
-            rotate(cmd[0], cmd[1]);
+    for(int i=0; i<N; ++i) {
+        for(int j=0; j<N; ++j) {
+            scanf("%d", &grid[i][j]);
+            minH = minH > grid[i][j] ? grid[i][j] : minH;
+            maxH = maxH < grid[i][j] ? grid[i][j] : maxH;
         }
-        
-        printU();
     }
+    
+    maxH += 1;
+    for(int h=minH; h<maxH; ++h) {
+        initVisited();
+        int safe = 0;
+        for(int x=0; x<N; ++x) {
+            for(int y=0; y<N; ++y) {
+                if(grid[x][y] <= h || visited[x][y]) continue;
+                else {
+                    safe += 1;
+                    bfs(x, y, h);
+                }
+            }
+        }
+        maxSafe = maxSafe < safe ? safe : maxSafe;
+    }
+    
+    printf("%d\n", maxSafe);
     
     return 0;
 }
