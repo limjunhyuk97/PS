@@ -1,103 +1,130 @@
-// DFS
-
 #include <iostream>
-#include <cmath>
-#include <queue>
-#include <vector>
-#define MAXLEN 55
+#include <list>
+#include <set>
+#define MAXLEN 15
 using namespace std;
 
-typedef pair<int, int> co;
+typedef pair<int, int> seed;
 
-int N, L, R;
+int N, M, K;
 int grid[MAXLEN][MAXLEN];
+int A[MAXLEN][MAXLEN];
 
-int dx[4] = {-1, 0, 0, 1};
-int dy[4] = {0, 1, -1, 0};
+set<seed> seeds;
+list<int> trees[MAXLEN][MAXLEN];
 
-bool visited[MAXLEN][MAXLEN];
+int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
 
-bool OOB(co node) {
-    if(node.first < 0 || node.second < 0 || node.first >=N || node.second >=N) return true;
+void initGrid() {
+    for(int i=0; i<MAXLEN; ++i) {
+        for(int j=0; j<MAXLEN; ++j) {
+            grid[i][j] = 5;
+        }
+    }
+}
+
+bool OOB(int x, int y) {
+    if(x < 1 || x > N || y < 1 || y > N) return true;
     else return false;
 }
 
-bool getGap(const co & c1, const co & c2) {
-    int gap = abs(grid[c1.first][c1.second]-grid[c2.first][c2.second]);
-    return (L<=gap) && (gap <=R);
-}
-
-void initVisited() {
-    for(int i=0; i<MAXLEN; ++i) {
-        for(int j=0; j<MAXLEN; ++j) {
-            visited[i][j] = false;
+void spring_summer() {
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            if(trees[i][j].empty()) continue;
+            list<int>::iterator point;
+            
+            bool flag = false;
+            int deads = 0;
+            
+            // 봄의 연산
+            for(auto iter = trees[i][j].begin(); iter != trees[i][j].end(); ++iter) {
+                if(grid[i][j] >= *iter) {
+                    grid[i][j] -= *iter;
+                    *iter += 1;
+                    if(*iter % 5 == 0) {
+                        for(int k=0; k<8; ++k) {
+                            int nx = i + dx[k], ny = j + dy[k];
+                            if(OOB(nx, ny)) continue;
+                            trees[nx][ny].push_front(1);
+                        }
+                    }
+                } else {
+                    if(!flag) {
+                        point = iter;
+                        flag = true;
+                    }
+                    deads += *iter / 2;
+                }
+            }
+            
+            // 죽은 놈들 지우기
+            if(flag) trees[i][j].erase(point, trees[i][j].end());
+            
+            // 여름에 양분으로 된다
+            grid[i][j] += deads;
+            
+            grid[i][j] += A[i][j];
         }
     }
 }
 
-bool bfs(int x, int y) {
-    queue<co> que;
-    vector<co> nodes;
-    
-    que.push({x, y});
-    nodes.push_back({x, y});
-    visited[x][y] = true;
-    
-    bool flag = false;
-    int people = grid[x][y];
-    
-    while(!que.empty()) {
-        co cur = que.front(); que.pop();
-        for(int i=0; i<4; ++i) {
-            co next = {cur.first + dx[i], cur.second + dy[i]};
-            
-            if(OOB(next) || visited[next.first][next.second]) continue;
-            if(!getGap(cur, next)) continue;
-            
-            visited[next.first][next.second] = true;
-            people += grid[next.first][next.second];
-            
-            nodes.push_back(next);
-            que.push(next);
-            flag = true;
+void fall() {
+    for(auto seed : seeds){
+        for(auto tree : trees[seed.first][seed.second]) {
+            if(tree % 5 != 0) continue;
+            for(int k=0; k<8; ++k) {
+                int nx = seed.first + dx[k], ny = seed.second + dy[k];
+                if(OOB(nx, ny)) continue;
+                trees[nx][ny].push_front(1);
+            }
         }
     }
-    
-    for(auto node : nodes) {
-        grid[node.first][node.second] = (int) (people / nodes.size());
+    seeds.clear();
+}
+
+
+int countTrees() {
+    int cnt = 0;
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            cnt += (int)trees[i][j].size();
+        }
     }
-    
-    return flag;
+    return cnt;
 }
 
 int main(void) {
     
-    scanf("%d %d %d", &N, &L, &R);
+    scanf("%d %d %d", &N, &M, &K);
     
-    for(int i=0; i<N; ++i) {
-        for(int j=0; j<N; ++j) {
-            scanf("%d", &grid[i][j]);
+    initGrid();
+
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            scanf("%d", &A[i][j]);
         }
     }
     
-    int moved = 0;
-    bool move_flag = false;
-    while(true) {
-        move_flag = false;
-        initVisited();
-        
-        for(int i=0; i<N; ++i) {
-            for(int j=0; j<N; ++j) {
-                if(visited[i][j]) continue;
-                if(bfs(i, j)) move_flag = true;
-            }
-        }
-        
-        if(!move_flag) break;
-        else moved += 1;
+    for(int i=0; i<M; ++i) {
+        int x, y, age; scanf("%d %d %d", &x, &y, &age);
+        trees[x][y].push_back(age);
     }
     
-    printf("%d\n", moved);
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            trees[i][j].sort();
+        }
+    }
+    
+    for(int i=0; i<K; ++i) {
+        spring_summer();
+        fall();
+
+    }
+    
+    printf("%d\n", countTrees());
     
     return 0;
 }
