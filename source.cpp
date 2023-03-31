@@ -1,91 +1,78 @@
 #include <iostream>
-#include <list>
-#include <set>
+#include <algorithm>
+#include <vector>
+#include <deque>
 #define MAXLEN 15
 using namespace std;
 
-typedef pair<int, int> seed;
-
 int N, M, K;
-int grid[MAXLEN][MAXLEN];
-int A[MAXLEN][MAXLEN];
 
-set<seed> seeds;
-list<int> trees[MAXLEN][MAXLEN];
+int aid[MAXLEN][MAXLEN];
+deque<int> trees[MAXLEN][MAXLEN];
+int A[MAXLEN][MAXLEN];
+int addTreeCnt[MAXLEN][MAXLEN];
 
 int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-int dy[8] = {0, 1, -1, 1, -1, 0, 1, -1};
+int dy[8] = {-1, 0, 1, 1, -1, -1, 0, 1};
 
-void initGrid() {
-    for(int i=0; i<MAXLEN; ++i) {
-        for(int j=0; j<MAXLEN; ++j) {
-            grid[i][j] = 5;
+void initAid() {
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            aid[i][j] = 5;
         }
     }
 }
 
-bool OOB(int x, int y) {
-    if(x < 1 || x > N || y < 1 || y > N) return true;
-    else return false;
-}
-
-void spring_summer() {
+void plantTree() {
     for(int i=1; i<=N; ++i) {
         for(int j=1; j<=N; ++j) {
-            if(trees[i][j].empty()) continue;
-            list<int>::iterator point;
-            
-            bool flag = false;
-            int deads = 0;
-            
-            // 봄의 연산
-            for(auto iter = trees[i][j].begin(); iter != trees[i][j].end(); ++iter) {
-                if(grid[i][j] >= *iter) {
-                    grid[i][j] -= *iter;
+            for(int k=0; k<addTreeCnt[i][j]; ++k) {
+                trees[i][j].push_front(1);
+            }
+            addTreeCnt[i][j] = 0;
+        }
+    }
+}
+
+void cycle() {
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            int alive = 0;
+            // 봄
+            for(deque<int>::iterator iter = trees[i][j].begin(); iter != trees[i][j].end(); ++iter) {
+                if(aid[i][j] >= *iter) {
+                    ++alive;
+                    aid[i][j] -= *iter;
                     *iter += 1;
                     if(*iter % 5 == 0) {
                         for(int k=0; k<8; ++k) {
                             int nx = i + dx[k], ny = j + dy[k];
-                            if(OOB(nx, ny)) continue;
-                            trees[nx][ny].push_front(1);
+                            addTreeCnt[nx][ny] += 1;
                         }
                     }
-                } else {
-                    if(!flag) {
-                        point = iter;
-                        flag = true;
-                    }
-                    deads += *iter / 2;
-                }
+                } else break;
             }
-            
-            // 죽은 놈들 지우기
-            if(flag) trees[i][j].erase(point, trees[i][j].end());
-            
-            // 여름에 양분으로 된다
-            grid[i][j] += deads;
-            
-            grid[i][j] += A[i][j];
+            // 여름
+            int dead = (int)trees[i][j].size() - alive;
+            while(dead--) {
+                aid[i][j] += trees[i][j].back() / 2;
+                trees[i][j].pop_back();
+            }
+            // 겨울
+            aid[i][j] += A[i][j];
         }
     }
 }
 
-void fall() {
-    for(auto seed : seeds){
-        for(auto tree : trees[seed.first][seed.second]) {
-            if(tree % 5 != 0) continue;
-            for(int k=0; k<8; ++k) {
-                int nx = seed.first + dx[k], ny = seed.second + dy[k];
-                if(OOB(nx, ny)) continue;
-                trees[nx][ny].push_front(1);
-            }
+void sortTrees() {
+    for(int i=1; i<=N; ++i) {
+        for(int j=1; j<=N; ++j) {
+            sort(trees[i][j].begin(), trees[i][j].end());
         }
     }
-    seeds.clear();
 }
 
-
-int countTrees() {
+int getTreeCnt() {
     int cnt = 0;
     for(int i=1; i<=N; ++i) {
         for(int j=1; j<=N; ++j) {
@@ -99,8 +86,6 @@ int main(void) {
     
     scanf("%d %d %d", &N, &M, &K);
     
-    initGrid();
-
     for(int i=1; i<=N; ++i) {
         for(int j=1; j<=N; ++j) {
             scanf("%d", &A[i][j]);
@@ -112,19 +97,15 @@ int main(void) {
         trees[x][y].push_back(age);
     }
     
-    for(int i=1; i<=N; ++i) {
-        for(int j=1; j<=N; ++j) {
-            trees[i][j].sort();
-        }
-    }
+    initAid();
+    sortTrees();
     
     for(int i=0; i<K; ++i) {
-        spring_summer();
-        fall();
-
+        cycle();
+        plantTree();
     }
     
-    printf("%d\n", countTrees());
+    printf("%d\n", getTreeCnt());
     
     return 0;
 }
