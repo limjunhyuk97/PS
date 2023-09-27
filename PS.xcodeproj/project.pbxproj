@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B1316B1428F5BE0D003AE9CC /* source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B1AA253528F45F2F00D933F8 /* source.cpp */; };
+		B1316B1428F5BE0D003AE9CC /* source.c++ in Sources */ = {isa = PBXBuildFile; fileRef = B1AA253528F45F2F00D933F8 /* source.c++ */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +57,7 @@
 		B19B798C29C94BDD00D512B4 /* 누적합(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "누적합(CPP).md"; sourceTree = "<group>"; };
 		B19B798D29C94BDD00D512B4 /* 분리집합(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "분리집합(CPP).md"; sourceTree = "<group>"; };
 		B19B798E29C94BDD00D512B4 /* 행렬 연산(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "행렬 연산(CPP).md"; sourceTree = "<group>"; };
-		B1AA253528F45F2F00D933F8 /* source.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = source.cpp; sourceTree = "<group>"; };
+		B1AA253528F45F2F00D933F8 /* source.c++ */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "source.c++"; sourceTree = "<group>"; };
 		B1D2E97629CC361D00BC216C /* LIS(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "LIS(CPP).md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +75,7 @@
 		B13977F627B39F730061ADDB = {
 			isa = PBXGroup;
 			children = (
-				B1AA253528F45F2F00D933F8 /* source.cpp */,
+				B1AA253528F45F2F00D933F8 /* source.c++ */,
 				B1527DA528F095F400E9F427 /* 백준 */,
 				B1527DA428F095F400E9F427 /* 코테 */,
 				B1527DA628F095F400E9F427 /* 템플릿 */,
@@ -187,7 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1316B1428F5BE0D003AE9CC /* source.cpp in Sources */,
+				B1316B1428F5BE0D003AE9CC /* source.c++ in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
