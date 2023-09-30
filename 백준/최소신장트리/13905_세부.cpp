@@ -83,7 +83,7 @@ int main(void) {
     
     while(maxW >= minW) {
         mid = (minW + maxW) >> 1;
-        if(kruskal(mid, edges)) minW = mid + 1;
+        if(kruskal(mid, edges)) minW = mid + 1;q
         else maxW = mid - 1;
     }
     
