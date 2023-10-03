@@ -30,6 +30,7 @@
 		B1527DA628F095F400E9F427 /* 템플릿 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "템플릿"; sourceTree = "<group>"; };
 		B1527DA728F095F400E9F427 /* 프로그래머스 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "프로그래머스"; sourceTree = "<group>"; };
 		B1527DA828F095F400E9F427 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B15E7BE72ACC5081001CD95B /* 분할 정복(CPP).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "분할 정복(CPP).md"; sourceTree = "<group>"; };
 		B15F39AE28E283900004188F /* PS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PS; sourceTree = BUILT_PRODUCTS_DIR; };
 		B19B797429C94BDD00D512B4 /* 우선순위큐(priority_queue).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "우선순위큐(priority_queue).md"; sourceTree = "<group>"; };
 		B19B797529C94BDD00D512B4 /* test.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = test.js; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 				B125975629C94CB400742EC1 /* 그리디(CPP).md */,
 				B125975729C94EF000742EC1 /* 백트래킹(CPP).md */,
 				B1D2E97629CC361D00BC216C /* LIS(CPP).md */,
+				B15E7BE72ACC5081001CD95B /* 분할 정복(CPP).md */,
 			);
 			path = "유형_CPP_VER";
 			sourceTree = "<group>";
