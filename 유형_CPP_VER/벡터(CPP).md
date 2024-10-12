@@ -107,7 +107,7 @@ upper_bound(v.begin(), v.end(), m) - lower_bound(v.begin(), v.end(), n);
 
 ## 테스트 공간
 
-```
+```cpp
 #include <iostream>
 #include <algorithm>
 #include <utility>
